@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="text-center">
-      <h1 class="text-4xl font-bold mb-8">Welcome to Spotify Stats</h1>
+      <h1 class="text-4xl font-bold mb-8">Welcome to Better Wrapped</h1>
       <div v-if="!authStore.isAuthenticated">
         <LoginButton />
       </div>
@@ -14,5 +14,8 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from '../stores/auth';
+import LoginButton from '../components/LoginButton.vue';
 
+const authStore = useAuthStore();
 </script>
