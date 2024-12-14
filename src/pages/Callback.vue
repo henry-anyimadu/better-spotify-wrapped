@@ -1,18 +1,57 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
+import { useSpotifyAuthStore } from '../stores/auth';
+import axios from "axios";
 
 const router = useRouter();
-const authStore = useAuthStore();
+const authStore = useSpotifyAuthStore();
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-onMounted(() => {
-  const hash = window.location.hash.substring(1);
-  const params = new URLSearchParams(hash);
-  const accessToken = params.get('access_token');
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
+  headers: {'Content-Type': 'application/json'}
+});
 
-  if (accessToken) {
-    authStore.setAccessToken(accessToken);
+onMounted(async () => {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+
+  if (!code) {
+    console.error('No authorization code found');
+    router.push('/');
+    return;
+  }
+
+  try {
+    console.log('Exchanging code for tokens...');
+    const response = await api.get(`/api/spotify/callback`, {
+      params: { code },
+    });
+
+    if (!response.data.access_token) {
+      throw new Error('No access token in response');
+    }
+
+    console.log('Token exchange successful');
+
+    // Store tokens in auth store
+    authStore.setTokens(
+        response.data.access_token,
+        response.data.refresh_token
+    );
+
+    // Verify token was stored
+    console.log('Token stored:', !!authStore.accessToken);
+
+    // Small delay to ensure store is updated
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    // Redirect to main app
+    router.push('/top-items');
+  } catch (error) {
+    console.error('Token exchange failed:', error);
     router.push('/');
   }
 });
@@ -20,6 +59,9 @@ onMounted(() => {
 
 <template>
   <div class="min-h-screen flex items-center justify-center">
-    <p>Logging you in...</p>
+    <div class="text-center">
+      <p class="text-gray-600 mb-2">Logging you in...</p>
+      <div class="w-8 h-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+    </div>
   </div>
 </template>

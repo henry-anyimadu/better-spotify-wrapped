@@ -1,24 +1,37 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 
-export const useAuthStore = defineStore('auth', () => {
-    const accessToken = ref<string | null>(null);
-    const isAuthenticated = ref(false);
+export const useSpotifyAuthStore = defineStore('spotifyAuth', {
+    state: () => {
+        // Load initial state from localStorage
+        const accessToken = localStorage.getItem('spotify_access_token');
+        const refreshToken = localStorage.getItem('spotify_refresh_token');
 
-    const setAccessToken = (token: string) => {
-        accessToken.value = token;
-        isAuthenticated.value = true;
-    };
+        console.log('Initial auth state:', { accessToken: !!accessToken, refreshToken: !!refreshToken });
 
-    const logout = () => {
-        accessToken.value = null;
-        isAuthenticated.value = false;
-    };
+        return {
+            accessToken,
+            refreshToken
+        };
+    },
+    getters: {
+        isAuthenticated: (state) => !!state.accessToken
+    },
+    actions: {
+        setTokens(accessToken: string, refreshToken: string) {
+            console.log('Setting tokens in store');
+            this.accessToken = accessToken;
+            this.refreshToken = refreshToken;
 
-    return {
-        accessToken,
-        isAuthenticated,
-        setAccessToken,
-        logout,
-    };
+            // Store in localStorage
+            localStorage.setItem('spotify_access_token', accessToken);
+            localStorage.setItem('spotify_refresh_token', refreshToken);
+        },
+        logout() {
+            console.log('Logging out, clearing tokens');
+            this.accessToken = null;
+            this.refreshToken = null;
+            localStorage.removeItem('spotify_access_token');
+            localStorage.removeItem('spotify_refresh_token');
+        }
+    }
 });
