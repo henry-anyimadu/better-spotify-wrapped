@@ -8,6 +8,7 @@ import { TimeRange, Limit } from '../types/filters';
 import FilterControls from '../components/common/FilterControls.vue';
 import TrackList from '../components/tracks/TrackList.vue';
 import ArtistList from '../components/artists/ArtistList.vue';
+import LogoutButton from "@/components/LogoutButton.vue";
 
 const router = useRouter();
 const authStore = useSpotifyAuthStore();
@@ -117,6 +118,7 @@ watch([activeTab, timeRange, limit], () => {
             v-model:timeRange="timeRange"
             v-model:limit="limit"
         />
+        <LogoutButton />
       </div>
 
       <!-- Content -->
