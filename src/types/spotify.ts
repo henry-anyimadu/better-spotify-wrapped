@@ -18,6 +18,7 @@ export interface SpotifyTrack {
 export interface SpotifyArtist {
     id: string;
     name: string;
+    popularity: string;
     images: { url: string }[];
     genres: string[];
 }

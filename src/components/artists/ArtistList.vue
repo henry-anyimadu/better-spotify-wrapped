@@ -1,13 +1,30 @@
 <script setup lang="ts">
-import { SpotifyArtist } from 'src/types/spotify.ts';
+import {onMounted, ref} from 'vue';
+import {SpotifyArtist} from 'src/types/spotify.ts';
 
-defineProps<{
+const props = defineProps<{
   artists: SpotifyArtist[];
 }>();
+
+const popularityScore = ref<number>(0);
+
+async function userPopularity() {
+  let totalPop = 0;
+
+  for (let i = 0; i < props.artists.length; i++) {
+    totalPop += Number(props.artists[i].popularity);
+  }
+
+  popularityScore.value = totalPop / (props.artists.length);
+}
+onMounted(() => {
+  userPopularity();
+})
 </script>
 
 <template>
   <div class="space-y-4">
+    <h3 class="font-bold text-white text-xl">Your popularity score = {{popularityScore}} </h3>
     <div
         v-for="(artist, index) in artists"
         :key="artist.id"
@@ -15,12 +32,12 @@ defineProps<{
     >
       <span class="text-lg font-medium text-gray-500 w-8">{{ index + 1 }}</span>
       <img
-          :src="artist.images[0]?.url"
+          :src="artist.images[1]?.url"
           :alt="artist.name"
           class="w-8 h-8 object-cover rounded-full"
       />
       <div>
-        <h3 class="font-medium">{{ artist.name }}</h3>
+        <h3 class="font-medium">{{ artist.name }} {{artist.popularity}}</h3>
         <p class="text-sm text-gray-600">
           {{ artist.genres.slice(0, 3).join(', ') }}
         </p>

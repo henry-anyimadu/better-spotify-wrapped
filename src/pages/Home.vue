@@ -13,8 +13,8 @@ if (authStore.accessToken) {
 
 <template>
   <div class="bg-hero-pattern min-h-screen flex items-center justify-left">
-    <div class="text-left px-8">
-      <h1 class="text-4xl text-white font-bold  mb-8">Welcome to Spotify Stats</h1>
+    <div class="text-left px-10">
+      <h1 class="text-4xl text-white font-bold  mb-8">Welcome to Wrapify</h1>
       <div v-if="!authStore.accessToken">
         <LoginButton />
       </div>
