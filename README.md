@@ -1,29 +1,5 @@
-# betterwrapped
+# Wrapify
 
-This template should help get you started developing with Vue 3 in Vite.
+Spotify messed up your wrapped this year. In fact, your "top songs" probably aren't even on your top 20! So, we're working on building a better Spotify Wrapped, with your actual information.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+This repo is very much in-progress.
