@@ -2,10 +2,12 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSpotifyAuthStore } from '../stores/auth';
+import { useUserStatsStore } from '../stores/userStats';
 import axios from "axios";
 
 const router = useRouter();
 const authStore = useSpotifyAuthStore();
+const userStatsStore = useUserStatsStore();
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const api = axios.create({
@@ -44,6 +46,9 @@ onMounted(async () => {
 
     // Verify token was stored
     console.log('Token stored:', !!authStore.accessToken);
+
+    // Fetch user stats
+    await userStatsStore.fetchAllUserStats(response.data.access_token);
 
     // Small delay to ensure store is updated
     await new Promise(resolve => setTimeout(resolve, 100));

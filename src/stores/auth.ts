@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useUserStatsStore } from './userStats.ts';
 
 export const useSpotifyAuthStore = defineStore('spotifyAuth', {
     state: () => {
@@ -28,6 +29,8 @@ export const useSpotifyAuthStore = defineStore('spotifyAuth', {
         },
         logout() {
             console.log('Logging out, clearing tokens');
+            const userStatsStore = useUserStatsStore();
+            userStatsStore.clearStats();
             this.accessToken = null;
             this.refreshToken = null;
             localStorage.removeItem('spotify_access_token');

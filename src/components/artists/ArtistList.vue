@@ -30,7 +30,7 @@ onMounted(() => {
         :key="artist.id"
         class="flex items-center gap-4 p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
     >
-      <span class="text-lg font-medium text-gray-500 w-8">{{ index + 1 }}</span>
+      <span class="text-lg font-medium text-gray-500 w-3 h-8">{{ index + 1 }}</span>
       <img
           :src="artist.images[1]?.url"
           :alt="artist.name"

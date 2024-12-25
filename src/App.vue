@@ -3,9 +3,7 @@
 </script>
 
 <template>
-  <div class="bg-hero-pattern">
     <router-view />
-  </div>
 </template>
 
 <style scoped>

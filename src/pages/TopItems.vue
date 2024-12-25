@@ -82,7 +82,8 @@ watch([activeTab, timeRange, limit], () => {
 </script>
 
 <template>
-  <div class="max-w-3xl mx-auto py-4 px-4">
+  <div class="bg-gray-800">
+  <div class=" max-w-3xl mx-auto py-4 px-4">
     <!-- Show error message if there is one -->
     <div v-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
       {{ error }}
@@ -135,5 +136,6 @@ watch([activeTab, timeRange, limit], () => {
           :artists="artists"
       />
     </template>
+  </div>
   </div>
 </template>
