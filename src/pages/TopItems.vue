@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// TODO: Popularity Score Calculation, Shareable card w/ top songs/artists + popularity score
+// TODO: Overall site redesign/UI
+// TODO: Figure out web hosting/GitHub Pages
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSpotifyAuthStore } from '../stores/auth';
@@ -8,7 +11,7 @@ import { TimeRange, Limit } from '../types/filters';
 import FilterControls from '../components/common/FilterControls.vue';
 import TrackList from '../components/tracks/TrackList.vue';
 import ArtistList from '../components/artists/ArtistList.vue';
-import LogoutButton from "@/components/LogoutButton.vue";
+import LogoutButton from "../components/LogoutButton.vue";
 
 const router = useRouter();
 const authStore = useSpotifyAuthStore();
