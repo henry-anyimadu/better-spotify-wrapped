@@ -21,3 +21,10 @@ if (authStore.accessToken) {
     </div>
   </div>
 </template>
+
+<style>
+/* Fallback background color */
+.min-h-screen {
+  background-color: rgb(51, 65, 85); /* This is the same as bg-slate-700 */
+}
+</style>
