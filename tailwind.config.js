@@ -7,7 +7,7 @@ export default {
         theme: {
             extend: {
                 backgroundImage: {
-                    'hero-pattern': "url('./src/assets/mesh-641.webp')"
+
                 }
             },
         },

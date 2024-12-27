@@ -12,7 +12,7 @@ if (authStore.accessToken) {
 </script>
 
 <template>
-  <div class="bg-hero-pattern min-h-screen flex items-center justify-left">
+  <div class="bg-slate-700 min-h-screen flex items-center justify-left">
     <div class="text-left px-10">
       <h1 class="text-4xl text-white font-bold  mb-8">Welcome to Wrapify</h1>
       <div v-if="!authStore.accessToken">
