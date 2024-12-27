@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
-import {SpotifyArtist} from 'src/types/spotify.ts';
+import {SpotifyArtist} from '../types/spotify.ts';
 
 const props = defineProps<{
   artists: SpotifyArtist[];
