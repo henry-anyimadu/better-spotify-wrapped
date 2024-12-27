@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-        content: [
-            "./index.html",
-            "./src/**/*.{vue,js,ts,jsx,tsx}",
-        ],
-        theme: {
-            extend: {
-                backgroundImage: {
-
-                }
-            },
+    content: [
+        "./index.html",
+        "./src/**/*.{vue,js,ts,jsx,tsx}",
+    ],
+    theme: {
+        extend: {
         },
-        plugins: [],
+    },
+    plugins: [],
+    safelist: [
+        'bg-slate-700'
+    ]
 }
