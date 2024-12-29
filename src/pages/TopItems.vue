@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // TODO: Popularity Score Calculation, Shareable card w/ top songs/artists + popularity score
 // TODO: Overall site redesign/UI
-// TODO: Figure out web hosting/GitHub Pages
+// DONE: Figure out web hosting/GitHub Pages
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSpotifyAuthStore } from '../stores/auth';
