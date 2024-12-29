@@ -19,12 +19,12 @@ const api = axios.create({
 onMounted(async () => {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-
-  if (!code) {
-    console.error('No authorization code found');
-    router.push('/');
-    return;
-  }
+  //
+  // if (!code) {
+  //   console.error('No authorization code found');
+  //   router.push('/');
+  //   return;
+  // }
 
   try {
     console.log('Exchanging code for tokens...');
