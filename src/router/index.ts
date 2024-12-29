@@ -5,7 +5,7 @@ import TopItems from '../pages/TopItems.vue';
 import SharePage from '../pages/SharePage.vue';
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/'),
     routes: [
         {
             path: '/',
