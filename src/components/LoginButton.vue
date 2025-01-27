@@ -30,8 +30,8 @@ async function login() {
 <template>
   <button
       @click="login"
-      class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full flex items-center gap-2"
+      class="bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 rounded-full flex items-center gap-2 w-fit mx-auto"
   >
-    <span>Login with Spotify</span>
+    <span>Developer Access</span>
   </button>
 </template>
