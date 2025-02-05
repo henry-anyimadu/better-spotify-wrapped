@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-950 h-full">
+  <div class="bg-slate-300 h-full">
     <div class=" max-w-3xl mx-auto py-4 px-4">
       <!-- Show error message if there is one -->
       <div v-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -31,12 +31,23 @@
             </button>
           </div>
 
-          <!-- Filter controls -->
-          <FilterControls
-              v-model:timeRange="timeRange"
-              v-model:limit="limit"
-          />
+        <!-- Filter controls -->
+        <FilterControls
+          v-model:timeRange="timeRange"
+          v-model:limit="limit"
+        />
+
+        <!-- Action buttons container -->
+        <div class="flex gap-4 items-center">  <!-- Add flex container -->
+          <button 
+            @click="router.push('/share')" 
+            class="bg-green-500 text-white px-4 py-2 rounded-full font-medium transition-colors hover:bg-green-600">
+            Share your top items
+          </button>
           <LogoutButton />
+        </div>
+
+
         </div>
 
         <!-- Content -->
