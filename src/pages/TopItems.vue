@@ -39,8 +39,8 @@
 
         <!-- Action buttons container -->
         <div class="flex gap-4 items-center">  <!-- Add flex container -->
-          <button 
-            @click="router.push('/share')" 
+          <button
+            @click="router.push('/share')"
             class="bg-green-500 text-white px-4 py-2 rounded-full font-medium transition-colors hover:bg-green-600">
             Share your top items
           </button>
@@ -103,12 +103,12 @@ const fetchTopItems = async () => {
 
   loading.value = true;
   error.value = null;
-  console.log('Fetching with token:', authStore.accessToken); // Add logging
+  console.log('Fetching with token');
 
   try {
     if (activeTab.value === 'tracks') {
       const data = await getTopTracks(authStore.accessToken, timeRange.value, limit.value);
-      console.log('Received tracks data:', data); // Add logging
+      console.log('Received tracks data');
       if (data && data.items) {
         tracks.value = data.items;
       } else {
@@ -116,7 +116,7 @@ const fetchTopItems = async () => {
       }
     } else {
       const data = await getTopArtists(authStore.accessToken, timeRange.value, limit.value);
-      console.log('Received artists data:', data); // Add logging
+      console.log('Received artists data');
       if (data && data.items) {
         artists.value = data.items;
       } else {
@@ -140,7 +140,7 @@ const fetchTopItems = async () => {
 
 // Call fetchTopItems when component mounts
 onMounted(() => {
-  console.log('Component mounted, checking auth...'); // Add logging
+  console.log('Component mounted, checking auth...');
   if (!authStore.accessToken) {
     console.log('No access token found, redirecting to login');
     router.push('/');

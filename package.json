@@ -5,9 +5,9 @@
   "type": "module",
   "homepage": "https://wrapify.henryany.com/",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --mode development",
+    "build": "vite build --mode production",
+    "preview": "vite preview --mode production"
   },
   "dependencies": {
     "axios": "^1.7.9",

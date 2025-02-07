@@ -3,15 +3,16 @@ import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSpotifyAuthStore } from '../stores/auth';
 import { useUserStatsStore } from '../stores/userStats';
+import { config } from "../config/environment.ts";
+
 import axios from "axios";
 
 const router = useRouter();
 const authStore = useSpotifyAuthStore();
 const userStatsStore = useUserStatsStore();
-const API_BASE_URL = "https://wrapify-backend.vercel.app"
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: config.apiUrl,
   withCredentials: true,
   headers: {'Content-Type': 'application/json'}
 });

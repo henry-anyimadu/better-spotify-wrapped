@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import axios from 'axios'
+import { config } from '../config/environment'
 
-// For prod
-const API_BASE_URL = "https://wrapify-backend.vercel.app"
 
 const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: config.apiUrl,
   withCredentials: true,
   headers: {'Content-Type': 'application/json'}
 })
