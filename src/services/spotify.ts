@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { config } from '../config/environment.ts'
+import {config} from '../config/environment.ts'
 
 const api = axios.create({
     baseURL: config.apiUrl,
@@ -24,11 +24,7 @@ export const getTopTracks = async (accessToken: string, timeRange: string, limit
                 },
             }
         );
-        const tracks = response.data;
-        console.log('Top tracks:', tracks); // Add logging
-
-
-        return tracks;
+        return response.data;
     } catch (error) {
         console.error('Error fetching top tracks:', error);
         throw error;
@@ -50,9 +46,7 @@ export const getTopArtists = async (accessToken: string, timeRange: string, limi
                 },
             }
         );
-        const artists = response.data;
-        console.log('Top artists:', artists); // Add logging
-        return artists;
+        return response.data;
     } catch (error) {
         console.error('Error fetching top artists:', error);
         throw error;
