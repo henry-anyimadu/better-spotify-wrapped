@@ -1,47 +1,5 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useUserStatsStore } from '@/stores/userStats';
-
-const cardData = ref<HTMLElement | null>(null);
-const userStatsStore = useUserStatsStore();
-const isGenerating = ref(false);
-
-const generateCard = async () => {
-    if (!cardData.value) {
-        console.error('No card data available');
-        return;
-    }
-
-    isGenerating.value = true
-
-    try {
-        const html2canvas = (await import('html2canvas')).default
-
-        const canvas = await html2canvas(cardData.value, {
-            backgroundColor: '#121212', // In the future, this will be matched to their top song's cover
-            scale: 2, // Increase resolution for better quality
-            logging: false, // Set to false for prod
-            useCORS: true, // Allows us to get images from Spotify
-            allowTaint: true // Also helps with external images
-        })
-
-        // Link Creation
-        const url = canvas.toDataURL('image/png');
-
-        const link = document.createElement('a');
-        link.download = `wrapify-stats-${new Date().toISOString().split('T')[0]}.png`;
-        link.href = url;
-        link.click();
-    } catch (err) {
-        console.error('Error generating card:', err);
-        alert('Sorry, there was an error generating your Wrapify stats. Please try again.');
-    }
-};
-
-</script>
 <template>
 <div class="flex flex-col items-center gap-8 p-8">
-
   <!-- Download button (feel free to use whatever icon library you want)-->
   <button
       @click="generateCard"
@@ -68,11 +26,12 @@ const generateCard = async () => {
     <!-- Card Preview -->
     <div
         ref="cardData"
-        class="bg-slate-800 p-6 rounded-lg shadow-xl w-full max-w-xl"
+        class="p-6 rounded-lg shadow-xl w-full max-w-xl"
+        :style="{ background: bgGradient }"
     >
         <div class="flex items-center text-center gap-4">
             <div class="w-full mb-6">
-                <h2 class="text-xl font-semibold text-yellow-400 text-center">My top songs</h2>
+                <h2 class="text-xl font-semibold text-white text-center">Last Month's top songs</h2>
             </div>
         </div>
 
@@ -80,10 +39,10 @@ const generateCard = async () => {
           <div
               v-for="(track, index) in userStatsStore.topTracks.slice(0,1)"
                :key="track.id || index"
-              class="flex-col items-center justify-center">
+              class="flex flex-col items-center w-full max-w-md mx-auto mb-8">
 
-            <img :src="track.album.images[0]?.url " class="card-image w-4/5 object-center"  alt="Top img"/>
-            <div class="flex flex-col gap-2">
+            <img :src="track.album.images[0]?.url " class="rounded-md h-auto w-full"  alt="Top img"/>
+            <div class="w-full text-left gap-2">
               <h3 class="text-lg capitalize pt-3 font-semibold text-white">{{ track.name }}</h3>
               <p class="text-sm text-gray-400">{{ track.artists[0].name }}</p>
             </div>
@@ -94,7 +53,7 @@ const generateCard = async () => {
         <div
             v-for="(track, index) in userStatsStore.topTracks.slice(1,5)"
             :key="track.id || index"
-            class="flex items-center gap-4 bg-slate-900 p-3 rounded"
+            class="flex items-center gap-4 bg-amber-100 bg-opacity-10 bg-blend-overlay p-3 rounded"
         >
           <span class="text-2xl font-bold text-white w-8">{{ index + 2 }}</span>
           <img
@@ -113,3 +72,62 @@ const generateCard = async () => {
 
 
 </template>
+<script setup lang="ts">
+import {ref, onMounted, computed} from 'vue';
+import { useUserStatsStore } from '@/stores/userStats';
+import { extractColorsFromImage, createGradientBackground } from '@/services/colorExtractor';
+
+const userStatsStore = useUserStatsStore();
+const cardData = ref<HTMLElement | null>(null);
+const isGenerating = ref(false);
+const topTrack = computed(() => userStatsStore.topTracks[0]);
+const bgGradient = ref('linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%)');
+
+// Create background gradient
+async function initializeBackground() {
+  try {
+    // Example image URL - replace with your actual image URL
+    const [color1, color2] = await extractColorsFromImage(topTrack.value.album.images[0].url);
+    bgGradient.value = createGradientBackground(color1, color2);
+  } catch (error) {
+    console.error('Failed to extract colors:', error);
+  }
+}
+
+const generateCard = async () => {
+  if (!cardData.value) {
+    console.error('No card data available');
+    return;
+  }
+
+  isGenerating.value = true
+
+  try {
+    const html2canvas = (await import('html2canvas')).default
+
+    const canvas = await html2canvas(cardData.value, {
+      backgroundColor: bgGradient.value, // In the future, this will be matched to their top song's cover
+      scale: 2, // Increase resolution for better quality
+      logging: false, // Set to false for prod
+      useCORS: true, // Allows us to get images from Spotify
+      allowTaint: true // Also helps with external images
+    })
+
+    // Link Creation
+    const url = canvas.toDataURL('image/png');
+
+    const link = document.createElement('a');
+    link.download = `wrapify-stats-${new Date().toISOString().split('T')[0]}.png`;
+    link.href = url;
+    link.click();
+
+  } catch (err) {
+    console.error('Error generating card:', err);
+    alert('Sorry, there was an error generating your Wrapify stats. Please try again.');
+  }
+};
+
+onMounted(() => {
+  initializeBackground();
+});
+</script>
