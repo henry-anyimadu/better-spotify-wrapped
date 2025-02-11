@@ -71,7 +71,7 @@ function getDominantColors(pixels: Uint8ClampedArray, k: number): RGB[] {
     });
 
     // Run k-means clustering
-    const maxIterations = 20;
+    const maxIterations = 10;
     for (let iteration = 0; iteration < maxIterations; iteration++) {
         // Assign points to clusters
         const clusters: ColorCluster[] = centroids.map(centroid => ({

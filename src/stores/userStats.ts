@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
-import { SpotifyTrack, SpotifyArtist } from '../types/spotify';
-import { getTopTracks, getTopArtists } from '../services/spotify';
+import { SpotifyTrack, SpotifyArtist, SpotifyUser } from '../types/spotify';
+import { getTopTracks, getTopArtists, getUserName } from '../services/spotify';
 
 interface UserStatsState {
   topTracks: SpotifyTrack[];
   topArtists: SpotifyArtist[];
+  profile: SpotifyUser;
   isLoading: boolean;
   error: string | null;
 }
@@ -13,6 +14,7 @@ export const useUserStatsStore = defineStore('userStats', {
   state: (): UserStatsState => ({
     topTracks: [],
     topArtists: [],
+    profile: ' ',
     isLoading: false,
     error: null
   }),
@@ -56,13 +58,15 @@ export const useUserStatsStore = defineStore('userStats', {
 
       try {
         // Fetch both top tracks and artists in parallel
-        const [tracksResponse, artistsResponse] = await Promise.all([
+        const [tracksResponse, artistsResponse, usernameResponse] = await Promise.all([
           getTopTracks(accessToken, 'medium_term', 50),
-          getTopArtists(accessToken, 'medium_term', 50)
+          getTopArtists(accessToken, 'medium_term', 50),
+          getUserName(accessToken)
         ]);
 
         this.topTracks = tracksResponse.items;
         this.topArtists = artistsResponse.items;
+        this.username = usernameResponse.items;
       } catch (error: any) {
         this.error = error.message;
         throw error;
@@ -74,6 +78,7 @@ export const useUserStatsStore = defineStore('userStats', {
     clearStats() {
       this.topTracks = [];
       this.topArtists = [];
+      this.username = '';
       this.error = null;
     }
   }

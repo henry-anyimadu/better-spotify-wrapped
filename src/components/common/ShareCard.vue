@@ -31,7 +31,7 @@
     >
         <div class="flex items-center text-center gap-4">
             <div class="w-full mb-6">
-                <h2 class="text-xl font-semibold text-white text-center">Last Month's top songs</h2>
+                <h2 class="text-xl font-semibold text-white text-center">Last Month's top songs for {{userStatsStore.username.name}}</h2>
             </div>
         </div>
 
@@ -106,7 +106,6 @@ const generateCard = async () => {
     const html2canvas = (await import('html2canvas')).default
 
     const canvas = await html2canvas(cardData.value, {
-      backgroundColor: bgGradient.value, // In the future, this will be matched to their top song's cover
       scale: 2, // Increase resolution for better quality
       logging: false, // Set to false for prod
       useCORS: true, // Allows us to get images from Spotify

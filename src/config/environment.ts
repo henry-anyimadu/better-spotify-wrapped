@@ -14,6 +14,6 @@ const configs: { [key: string]: Config } = {
     }
 };
 
-const environment = import.meta.env.VITE_APP_ENV || 'development';
+const environment = import.meta.env.VITE_APP_ENV;
 
 export const config: Config = configs[environment];
