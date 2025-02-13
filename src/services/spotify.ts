@@ -53,7 +53,7 @@ export const getTopArtists = async (accessToken: string, timeRange: string, limi
     }
 };
 
-export const getUserName = async (accessToken: string) => {
+export const getProfile = async (accessToken: string) => {
     try {
         const response = await api.get(
             `https://api.spotify.com/v1/me/profile`,
