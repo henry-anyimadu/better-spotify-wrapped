@@ -75,6 +75,8 @@
 
 </template>
 <script setup lang="ts">
+// TODO: Add Rarity score to Share Card
+// TODO: Add functionality for editing info on share card (songs v artists)
 import {ref, onMounted, computed} from 'vue';
 import { useUserStatsStore } from '@/stores/userStats';
 import { extractColorsFromImage, createGradientBackground } from '@/services/colorExtractor';

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// TODO: Update landing page, making it clear what Wrapify does, and excite the user to try it out.
+// TODO: Apply for Spotify Extended Quota
 import { useSpotifyAuthStore } from '../stores/auth';
 import { useRouter } from 'vue-router';
 import LoginButton from '../components/LoginButton.vue';

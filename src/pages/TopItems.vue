@@ -70,8 +70,6 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Overall site redesign/UI
-// TODO: Add functionality for editing info on share card (songs v artists)
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSpotifyAuthStore } from '../stores/auth';
