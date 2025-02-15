@@ -50,11 +50,11 @@
           </div>
 
       <!-- Tracks 2-5 -->
-      <div class="mt-4 grid grid-cols-2 gap-2">
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
         <div
             v-for="(track, index) in userStatsStore.topTracks.slice(1,9)"
             :key="track.id || index"
-            class="flex items-center gap-4 bg-gray-900 bg-opacity-10 bg-blend-overlay p-3 rounded"
+            class="flex items-center text-wrap gap-4 bg-gray-900 bg-opacity-10 bg-blend-overlay p-3 rounded"
         >
           <span class="text-2xl font-bold text-white w-8">{{ index + 2 }}</span>
           <img
