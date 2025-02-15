@@ -52,7 +52,7 @@
       <!-- Tracks 2-5 -->
       <div class="mt-4 grid grid-cols-2 gap-2">
         <div
-            v-for="(track, index) in userStatsStore.topTracks.slice(1,5)"
+            v-for="(track, index) in userStatsStore.topTracks.slice(1,9)"
             :key="track.id || index"
             class="flex items-center gap-4 bg-gray-900 bg-opacity-10 bg-blend-overlay p-3 rounded"
         >

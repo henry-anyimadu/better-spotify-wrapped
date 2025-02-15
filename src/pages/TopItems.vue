@@ -43,7 +43,7 @@
           <button
             @click="router.push('/share')"
             class="bg-green-500 text-white px-4 py-2 rounded-full font-medium transition-colors hover:bg-green-600">
-            Share your top items
+            <PhExport :size="32" />
           </button>
           <LogoutButton />
         </div>
@@ -82,6 +82,7 @@ import FilterControls from '../components/common/FilterControls.vue';
 import TrackList from '../components/tracks/TrackList.vue';
 import ArtistList from '../components/artists/ArtistList.vue';
 import LogoutButton from "../components/LogoutButton.vue";
+import {PhExport} from "@phosphor-icons/vue";
 
 const router = useRouter();
 const authStore = useSpotifyAuthStore();
