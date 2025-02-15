@@ -12,10 +12,10 @@
       </div>
 
       <!-- Show content when not loading -->
-      <template v-else>
+      <template v-else class="flex">
         <div class="mb-8">
           <!-- Tab controls -->
-          <div class="flex gap-4 mb-6">
+          <div class="flex justify-center gap-4 mb-6">
             <button
                 v-for="tab in ['tracks', 'artists']"
                 :key="tab"
@@ -35,10 +35,11 @@
         <FilterControls
           v-model:timeRange="timeRange"
           v-model:limit="limit"
+          class="justify-center"
         />
 
         <!-- Action buttons container -->
-        <div class="flex gap-4 items-center">  <!-- Add flex container -->
+        <div class="flex gap-4 justify-center">
           <button
             @click="router.push('/share')"
             class="bg-green-500 text-white px-4 py-2 rounded-full font-medium transition-colors hover:bg-green-600">
