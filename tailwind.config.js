@@ -6,10 +6,43 @@ export default {
     ],
     theme: {
         extend: {
+            keyframes: {
+                'fancy-hover': {
+                    '0%': {
+                        transform: 'translateY(0)',
+                        boxShadow: 'var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)',
+                        borderWidth: '2px'
+                    },
+                    '100%': {
+                        transform: 'translateY(-12px)',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        borderWidth: '4px'
+                    }
+                },
+                'fancy-unhover': {
+                    '0%': {
+                        transform: 'translateY(-12px)',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        borderWidth: '4px'
+                    },
+                    '100%': {
+                        transform: 'translateY(0)',
+                        boxShadow: 'var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)',
+                        borderWidth: '2px'
+                    }
+                }
+            },
+            animation: {
+                'fancy-hover': 'fancy-hover 0.3s ease-in forwards',
+                'fancy-unhover': 'fancy-unhover 0.5s ease-in forwards'
+            },
+            boxShadow: {
+                'hover-xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+            }
         },
     },
     plugins: [],
     safelist: [
-        'bg-slate-700'
+        'animate-fancy-hover'
     ]
 }

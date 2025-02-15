@@ -11,7 +11,7 @@ defineProps<{
     <div
         v-for="(track, index) in tracks"
         :key="track.id"
-        class="flex-col items-center h-full gap-12 p-6 bg-[hsl(225,20%,10%)] border-2 border-[hsl(225,20%,50%)] rounded-lg shadow hover:shadow-md hover: transition-shadow"
+        class="flex-col items-center h-full gap-12 p-6 bg-[hsl(225,20%,10%)] border-[hsl(225,20%,50%)] rounded-lg shadow animate-fancy-unhover hover:animate-fancy-hover"
     >
       <img
           :src="track.album.images[0]?.url"
