@@ -5,7 +5,7 @@ import { getTopTracks, getTopArtists, getProfile } from '../services/spotify';
 interface UserStatsState {
   topTracks: SpotifyTrack[];
   topArtists: SpotifyArtist[];
-  profile: SpotifyUser[];
+  profile: SpotifyUser;
   isLoading: boolean;
   error: string | null;
 }
@@ -14,7 +14,12 @@ export const useUserStatsStore = defineStore('userStats', {
   state: (): UserStatsState => ({
     topTracks: [],
     topArtists: [],
-    profile: [],
+    profile: {
+      id: '',
+      display_name: '',
+      email: '',
+      images: []
+    },
     isLoading: false,
     error: null
   }),
@@ -59,8 +64,8 @@ export const useUserStatsStore = defineStore('userStats', {
       try {
         // Fetch both top tracks and artists in parallel
         const [tracksResponse, artistsResponse, profileResponse] = await Promise.all([
-          getTopTracks(accessToken, 'medium_term', 50),
-          getTopArtists(accessToken, 'medium_term', 50),
+          getTopTracks(accessToken, 'short_term', 50),
+          getTopArtists(accessToken, 'long_term', 50),
           getProfile(accessToken)
         ]);
 
@@ -78,7 +83,7 @@ export const useUserStatsStore = defineStore('userStats', {
     clearStats() {
       this.topTracks = [];
       this.topArtists = [];
-      this.profile = [];
+      this.profile = {id: '', display_name: '', email: '', images: []};
       this.error = null;
     }
   }

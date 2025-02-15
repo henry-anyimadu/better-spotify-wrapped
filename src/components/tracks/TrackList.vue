@@ -7,21 +7,21 @@ defineProps<{
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 m-12 max-w-full">
     <div
         v-for="(track, index) in tracks"
         :key="track.id"
-        class="flex items-center gap-4 p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
+        class="flex-col items-center h-full gap-12 p-6 bg-[hsl(225,20%,10%)] border-2 border-[hsl(225,20%,50%)] rounded-lg shadow hover:shadow-md hover: transition-shadow"
     >
-      <span class="text-lg font-medium text-gray-500 w-8">{{ index + 1 }}</span>
       <img
           :src="track.album.images[0]?.url"
           :alt="track.album.name"
-          class="w-8 h-8 object-cover rounded"
+          class="w-full h-3/4 object-cover pb-4 rounded"
       />
-      <div>
-        <h3 class="font-medium">{{ track.name }}</h3>
-        <p class="text-sm text-gray-600">
+      <span class="text-xl font-extrabold text-white pb-2">{{ index + 1 }}</span>
+      <div class="text-[hsl(225,20%,90%)] truncate flex-wrap">
+        <h3 class="font-bold">{{ track.name }}</h3>
+        <p class="text-sm">
           {{ track.artists.map(artist => artist.name).join(', ') }}
         </p>
       </div>

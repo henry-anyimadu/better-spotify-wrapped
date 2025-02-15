@@ -56,7 +56,7 @@ export const getTopArtists = async (accessToken: string, timeRange: string, limi
 export const getProfile = async (accessToken: string) => {
     try {
         const response = await api.get(
-            `https://api.spotify.com/v1/me/profile`,
+            `https://api.spotify.com/v1/me`,
             {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`

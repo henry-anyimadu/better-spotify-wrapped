@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-slate-300 h-full">
-    <div class=" max-w-3xl mx-auto py-4 px-4">
+  <div class="h-full">
+    <div class=" max-w-full mx-auto py-4 px-4">
       <!-- Show error message if there is one -->
       <div v-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
         {{ error }}
@@ -69,10 +69,8 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Popularity Score Calculation, Shareable card w/ top songs/artists + popularity score
 // TODO: Overall site redesign/UI
 // TODO: Add functionality for editing info on share card (songs v artists)
-// TODO:
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSpotifyAuthStore } from '../stores/auth';
@@ -87,8 +85,8 @@ import LogoutButton from "../components/LogoutButton.vue";
 const router = useRouter();
 const authStore = useSpotifyAuthStore();
 const activeTab = ref<'tracks' | 'artists'>('tracks');
-const timeRange = ref<TimeRange>('medium_term');
-const limit = ref<Limit>(10);
+const timeRange = ref<TimeRange>('short_term');
+const limit = ref<Limit>(50);
 const tracks = ref<SpotifyTrack[]>([]);
 const artists = ref<SpotifyArtist[]>([]);
 const loading = ref(false);
@@ -97,7 +95,7 @@ const error = ref<string | null>(null);
 const fetchTopItems = async () => {
   if (authStore.accessToken == undefined) {
     console.error('No access token available');
-    router.push('/');
+    await router.push('/');
     return;
   }
 
@@ -131,7 +129,7 @@ const fetchTopItems = async () => {
 
     if (err.response?.status === 401) {
       authStore.logout();
-      router.push('/');
+      await router.push('/');
     }
   } finally {
     loading.value = false;

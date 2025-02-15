@@ -29,9 +29,10 @@
         class="p-6 rounded-lg shadow-xl w-full max-w-xl"
         :style="{ background: bgGradient }"
     >
-        <div class="flex items-center text-center gap-4">
+        <div
+            class="flex items-center text-center gap-4">
             <div class="w-full mb-6">
-                <h2 class="text-xl font-semibold text-white text-center">Last Month's top songs for {{userStatsStore.username.name}}</h2>
+                <h2 class="text-xl font-semibold text-white text-center">Last Month's top songs</h2>
             </div>
         </div>
 
@@ -53,7 +54,7 @@
         <div
             v-for="(track, index) in userStatsStore.topTracks.slice(1,5)"
             :key="track.id || index"
-            class="flex items-center gap-4 bg-amber-100 bg-opacity-10 bg-blend-overlay p-3 rounded"
+            class="flex items-center gap-4 bg-gray-900 bg-opacity-10 bg-blend-overlay p-3 rounded"
         >
           <span class="text-2xl font-bold text-white w-8">{{ index + 2 }}</span>
           <img
@@ -66,6 +67,7 @@
             <p class="text-gray-400 text-sm truncate">{{ track.artists[0].name }}</p>
           </div>
         </div>
+        <p class="text-md text-white text-center">Made with wrapify.henryany.com</p>
       </div>
     </div>
 </div>
@@ -76,6 +78,7 @@
 import {ref, onMounted, computed} from 'vue';
 import { useUserStatsStore } from '@/stores/userStats';
 import { extractColorsFromImage, createGradientBackground } from '@/services/colorExtractor';
+import {SpotifyArtist} from "@/types/spotify.ts";
 
 const userStatsStore = useUserStatsStore();
 const cardData = ref<HTMLElement | null>(null);
@@ -126,7 +129,24 @@ const generateCard = async () => {
   }
 };
 
+const props = defineProps<{
+  artists: SpotifyArtist[];
+}>();
+
+const popularityScore = ref<number>(0);
+
+async function userPopularity() {
+  let totalPop = 0;
+
+  for (let i = 0; i < props.artists.length; i++) {
+    totalPop += Number(props.artists[i].popularity);
+  }
+
+  popularityScore.value = totalPop / (props.artists.length);
+}
+
 onMounted(() => {
   initializeBackground();
+  // userPopularity();
 });
 </script>

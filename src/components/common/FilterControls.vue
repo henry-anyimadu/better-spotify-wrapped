@@ -17,13 +17,13 @@ const timeRangeOptions = [
   { value: 'long_term', label: 'Last Year' },
 ];
 
-const limitOptions = [5, 10, 20];
+const limitOptions = [5, 10, 50];
 </script>
 
 <template>
   <div class="flex gap-4 mb-6">
     <div class="flex items-center gap-2">
-      <label class="text-sm font-medium">Time Range:</label>
+      <label class="text-sm text-white font-medium">Time Range:</label>
       <select
           :value="timeRange"
           @change="emit('update:timeRange', ($event.target as HTMLSelectElement).value as TimeRange)"
@@ -40,7 +40,7 @@ const limitOptions = [5, 10, 20];
     </div>
 
     <div class="flex items-center gap-2">
-      <label class="text-sm font-medium">Show:</label>
+      <label class="text-sm text-white font-medium">Show:</label>
       <select
           :value="limit"
           @change="emit('update:limit', Number(($event.target as HTMLSelectElement).value) as Limit)"

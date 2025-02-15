@@ -17,6 +17,7 @@ async function userPopularity() {
 
   popularityScore.value = totalPop / (props.artists.length);
 }
+
 onMounted(() => {
   userPopularity();
 })

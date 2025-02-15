@@ -29,7 +29,7 @@
         <h1 class="text-3xl font-bold text-white text-center mb-8">
           Share Your Wrapify Stats
         </h1>
-          <ShareableCard />
+          <ShareCard />
 
         <div class="text-center mt-8">
           <router-link
@@ -46,15 +46,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import {onMounted, ref} from 'vue'
 import { useRouter } from 'vue-router'
 import { useSpotifyAuthStore } from '../stores/auth'
 import { useUserStatsStore } from '../stores/userStats'
-import ShareableCard from '../components/common/ShareCard.vue'
+import ShareCard from '../components/common/ShareCard.vue'
+import {Limit, TimeRange} from '@/types/filters.ts';
+import {SpotifyArtist, SpotifyTrack} from "@/types/spotify.ts";
+import { getTopTracks, getTopArtists } from '../services/spotify';
 
 const router = useRouter()
 const authStore = useSpotifyAuthStore()
 const userStatsStore = useUserStatsStore()
+// const activeTab = ref<'tracks' | 'artists'>('tracks');
+// const timeRange = ref<TimeRange>('short_term');
+// const limit = ref<Limit>(50);
+// const tracks = ref<SpotifyTrack[]>([]);
+// const artists = ref<SpotifyArtist[]>([]);
 
 onMounted(() => {
   // Redirect to login if not authenticated
@@ -74,6 +82,7 @@ const loadStats = async () => {
 
   try {
     await userStatsStore.fetchAllUserStats(authStore.accessToken)
+
   } catch (error) {
     console.error('Failed to load stats:', error)
   }
