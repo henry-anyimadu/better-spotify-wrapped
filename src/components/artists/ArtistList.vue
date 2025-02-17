@@ -35,10 +35,16 @@ onMounted(() => {
         :key="artist.id"
         class="flex-col items-center h-full gap-12 p-4 bg-[hsl(225,20%,10%)] border-[hsl(225,20%,50%)] rounded-lg shadow animate-fancy-unhover hover:animate-fancy-hover"
     >
+      <a
+        :href="artist.external_urls.spotify"
+        target="_blank"
+        rel="noopener noreferrer"
+        >
       <img
           :src="artist.images[0]?.url"
           :alt="artist.name"
           class="w-full h-3/4 object-cover pb-4 rounded"
+
       />
       <span class="text-xl text-left font-extrabold text-white pb-2">{{ index + 1 }}</span>
       <br />
@@ -49,6 +55,7 @@ onMounted(() => {
           {{ artist.genres.slice(0, 3).join(', ') }}
         </p>
       </div>
+      </a>
     </div>
   </div>
 </template>

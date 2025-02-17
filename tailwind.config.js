@@ -33,8 +33,8 @@ export default {
                 }
             },
             animation: {
-                'fancy-hover': 'fancy-hover 0.3s ease-in forwards',
-                'fancy-unhover': 'fancy-unhover 0.5s ease-in forwards'
+                'fancy-hover': 'fancy-hover 0.2s ease-in forwards',
+                'fancy-unhover': 'fancy-unhover 0.3s ease-in forwards'
             },
             boxShadow: {
                 'hover-xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)'

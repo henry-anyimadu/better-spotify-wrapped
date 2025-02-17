@@ -13,6 +13,7 @@ export interface SpotifyTrack {
         name: string;
         images: { url: string }[];
     };
+    external_urls: { spotify: string };
 }
 
 export interface SpotifyArtist {
@@ -21,6 +22,7 @@ export interface SpotifyArtist {
     popularity: string;
     images: { url: string }[];
     genres: string[];
+    external_urls: { spotify: string };
 }
 
 export interface SpotifyImage {

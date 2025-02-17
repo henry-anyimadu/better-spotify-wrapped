@@ -13,6 +13,11 @@ defineProps<{
         :key="track.id"
         class="flex-col items-center h-full gap-12 p-4 bg-[hsl(225,20%,10%)] border-[hsl(225,20%,50%)] rounded-lg shadow animate-fancy-unhover hover:animate-fancy-hover"
     >
+      <a
+        :href="track.external_urls.spotify"
+        target="_blank"
+        rel="noopener noreferrer"
+        >
       <img
           :src="track.album.images[0]?.url"
           :alt="track.album.name"
@@ -25,6 +30,7 @@ defineProps<{
           {{ track.artists.map(artist => artist.name).join(', ') }}
         </p>
       </div>
+      </a>
     </div>
   </div>
 </template>
