@@ -2,7 +2,7 @@
   <Suspense fallback="loading">
     <!-- Share page. Eventually there will be a button on another page leading here, but for now it is
     accessible via /share -->
-  <div class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 py-8">
+  <div class="min-h-screen bg-gradient-to-br from-purple-400 via-red-500 to-orange-400 py-8">
     <div class="container mx-auto max-w-4xl px-4">
       <!-- Loading State -->
       <div v-if="userStatsStore.isLoading" class="text-center py-12">
